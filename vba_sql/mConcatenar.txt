@@ -1,0 +1,15 @@
+Sub TesteSQL()
+
+    Call SQL_BuscaCarros
+    MsgBox (UCase(sqlBuscaCarros))
+    
+End Sub
+    
+Sub TesteSQLComVariavel()
+    
+    Call SQL_CadastraCarros
+    Dim strDois
+    strDois = Replace(sqlCadastraCarros, "Maverick", "Alfa Romeo")
+    MsgBox (strDois)
+    
+End Sub

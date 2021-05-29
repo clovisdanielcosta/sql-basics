@@ -1,0 +1,32 @@
+Public sqlBuscaCarros As String
+Public sqlCadastraCarros As String
+
+ Sub SQL_BuscaCarros()
+
+Dim carro As String
+
+carro = "Fiesta"
+
+sqlBuscaCarros = _
+                        " SELECT m.marca, m.origem, c.modelo, c.ano " & _
+                        " FROM marcas as m, '" & carro & "' as c " & _
+                        " WHERE m.codMarca = c.codMarca " & _
+                        " AND m.origem IN('Italiana','Alemã','Francesa') " & _
+                        " ORDER BY c.ano "
+
+End Sub
+
+Sub SQL_CadastraCarros()
+
+Dim carro As String
+
+carro = "Maverick"
+
+sqlCadastraCarros = _
+                        " SELECT m.marca, m.origem, c.modelo, c.ano " & _
+                        " FROM marcas as m, '" & carro & "' as c " & _
+                        " WHERE m.codMarca = c.codMarca " & _
+                        " AND m.origem IN('Italiana','Alemã','Francesa') " & _
+                        " ORDER BY c.ano "
+
+End Sub

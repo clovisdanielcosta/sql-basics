@@ -1,6 +1,0 @@
-Converter SQL em VBA:
-
-1 - Criar um arquivo ConversorSQLVBA.xlsm
-
-2 - Copiar o conteúdo do arquivo ConversorSQLVBA.txt do GH.
-

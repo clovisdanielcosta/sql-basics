@@ -1,0 +1,19 @@
+Converter SQL para String VBA														"									
+														SQL Exemplo									
+Variáveis	Substituto		Cole sua Query na linha abaixo:											Tabulação Máxima 7 Níveis									
+'Fiesta'	tipo_carro		" SELECT" & _											SELECT 									
+c.codmarca	C.codmodelo		" M.MARCA," & _												M.MARCA, 								
+			" M.ORIGEM," & _												M.ORIGEM, 								
+			" C.MODELO," & _												C.MODELO, 								
+			" C.ANO" & _												C.ANO								
+			" FROM" & _											FROM 									
+			" MARCAS AS M," & _												MARCAS AS M, 								
+			"  " & TIPO_CARRO & "  AS C" & _												'FIESTA' AS C								
+			" WHERE" & _													WHERE							
+			" M.CODMARCA = C.CODMODELO" & _														 M.CODMARCA = C.CODMARCA						
+			" AND" & _															AND 					
+			" M.ORIGEM" & _																M.ORIGEM 				
+			" IN ('ITALIANA','ALEMÃ','FRANCESA')" & _																	IN ('ITALIANA','ALEMÃ','FRANCESA')			
+			" ORDER BY C.ANO" 											ORDER BY C.ANO									
+
+

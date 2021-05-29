@@ -1,0 +1,79 @@
+Sub ConverterSQL()
+
+    Dim i As Integer
+    i = 4
+    
+    While pConversor.Cells(i, 4).Value <> "" Or _
+                pConversor.Cells(i, 5).Value <> "" Or _
+                pConversor.Cells(i, 6).Value <> "" Or _
+                pConversor.Cells(i, 7).Value <> "" Or _
+                pConversor.Cells(i, 8).Value <> "" Or _
+                pConversor.Cells(i, 9).Value <> "" Or _
+                pConversor.Cells(i, 10).Value <> ""
+    
+                
+                
+                For j = 5 To 10
+                    pConversor.Cells(i, 4).Value = pConversor.Cells(i, 4).Value & " " & pConversor.Cells(i, j).Value
+                Next
+                
+                pConversor.Cells(i, 4).Value = pConversor.Cells(1, 18).Value & " " & LTrim(pConversor.Cells(i, 4).Value)
+                
+                pConversor.Cells(i, 4).Value = RTrim(pConversor.Cells(i, 4).Value) & pConversor.Cells(1, 18).Value & " & _"
+                
+                pConversor.Range(Cells(i, 5), Cells(i, 10)).ClearContents
+                
+                
+                i = i + 1
+    Wend
+                
+                pConversor.Cells(i - 1, 4).Value = Replace(pConversor.Cells(i - 1, 4).Value, "& _", "")
+            
+End Sub
+
+Sub CarregarExemplo()
+
+    Range("R4:X17").Select
+    Selection.Copy
+    Range("D4").Select
+    ActiveSheet.Paste
+    Range("D4").Select
+    Application.CutCopyMode = False
+    
+End Sub
+
+Sub SubstituirVariaveis()
+
+    Dim variavel As String
+    Dim substituto As String
+    Dim direita As String
+    Dim esquerda As String
+    Dim i, j
+    
+    esquerda = " " & pConversor.Cells(1, 18).Value & " & "
+    direita = " & " & pConversor.Cells(1, 18).Value & " "
+    i = 4
+    
+    While pConversor.Cells(i, 1).Value <> ""
+        
+            variavel = UCase(pConversor.Cells(i, 1).Value)
+            substituto = UCase(pConversor.Cells(i, 2).Value)
+            
+                        j = 4
+                        While pConversor.Cells(j, 4).Value <> ""
+                                
+                                If Left(variavel, 1) = "'" Then
+                                    pConversor.Cells(j, 4).Value = Replace(pConversor.Cells(j, 4).Value, variavel, esquerda & substituto & direita)
+                                Else
+                                    pConversor.Cells(j, 4).Value = Replace(pConversor.Cells(j, 4).Value, variavel, substituto)
+                                End If
+                                
+                                j = j + 1
+                        
+                        Wend
+            
+            i = i + 1
+            
+    Wend
+        
+End Sub
