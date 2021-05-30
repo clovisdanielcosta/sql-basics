@@ -1,41 +1,20 @@
+Dim asFinais$
+
 Sub ConverterSQL()
 
-    Dim i As Integer
+    Dim i%
+    aspasFinais = """"
     i = 4
     
-    While pConversor.Cells(i, 5).Value <> "" Or _
-                pConversor.Cells(i, 6).Value <> "" Or _
-                pConversor.Cells(i, 7).Value <> "" Or _
-                pConversor.Cells(i, 8).Value <> "" Or _
-                pConversor.Cells(i, 9).Value <> "" Or _
-                pConversor.Cells(i, 10).Value <> "" Or _
-                pConversor.Cells(i, 11).Value <> "" Or _
-                pConversor.Cells(i + 1, 5).Value <> "" Or _
-                pConversor.Cells(i + 2, 5).Value <> "" Or _
-                pConversor.Cells(i + 3, 5).Value <> "" Or _
-                pConversor.Cells(i + 4, 5).Value <> "" Or _
-                pConversor.Cells(i + 5, 5).Value <> "" Or _
-                pConversor.Cells(i + 1, 6).Value <> "" Or _
-                pConversor.Cells(i + 2, 6).Value <> "" Or _
-                pConversor.Cells(i + 3, 6).Value <> "" Or _
-                pConversor.Cells(i + 4, 6).Value <> "" Or _
-                pConversor.Cells(i + 5, 6).Value <> "" Or _
-                pConversor.Cells(i + 1, 7).Value <> "" Or _
-                pConversor.Cells(i + 2, 7).Value <> "" Or _
-                pConversor.Cells(i + 3, 7).Value <> "" Or _
-                pConversor.Cells(i + 4, 7).Value <> "" Or _
-                pConversor.Cells(i + 5, 7).Value <> ""
+    While WorksheetFunction.CountA(pConversor.Range(Cells(i, 5), Cells(i + 5, 8))) <> 0
     
                 For j = 6 To 11
-                    pConversor.Cells(i, 5).Value = pConversor.Cells(i, 5).Value & " " & pConversor.Cells(i, j).Value
+                    pConversor.Cells(i, 5).Value = UCase(pConversor.Cells(i, 5).Value) & " " & UCase(pConversor.Cells(i, j).Value)
                 Next
                 
-                pConversor.Cells(i, 5).Value = pConversor.Cells(1, 19).Value & " " & LTrim(pConversor.Cells(i, 5).Value)
-                
-                pConversor.Cells(i, 5).Value = RTrim(pConversor.Cells(i, 5).Value) & " " & pConversor.Cells(1, 19).Value & " & _"
-                
+                pConversor.Cells(i, 5).Value = aspasFinais & " " & LTrim(pConversor.Cells(i, 5).Value)
+                pConversor.Cells(i, 5).Value = RTrim(pConversor.Cells(i, 5).Value) & " " & aspasFinais & " & _"
                 pConversor.Range(Cells(i, 6), Cells(i, 11)).ClearContents
-                
                 
                 i = i + 1
     Wend
@@ -57,14 +36,12 @@ End Sub
 
 Sub SubstituirVariaveis()
 
-    Dim variavel As String
-    Dim substituto As String
-    Dim direita As String
-    Dim esquerda As String
-    Dim i, j
+    Dim variavel$, substituto$, direita$, esquerda$
+    Dim i%, j%
     
-    esquerda = " '  " & pConversor.Cells(1, 19).Value & " & "
-    direita = " & " & pConversor.Cells(1, 19).Value & " ' "
+    aspasFinais = """"
+    esquerda = " '  " & aspasFinais & " & "
+    direita = " & " & aspasFinais & " ' "
     i = 4
     
     While pConversor.Cells(i, 2).Value <> ""

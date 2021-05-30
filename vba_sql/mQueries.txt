@@ -3,7 +3,7 @@ Public sqlCadastraCarros As String
 
  Sub SQL_BuscaCarros()
 
-Dim carro As String
+Dim carro$
 
 carro = "Fiesta"
 
@@ -18,7 +18,7 @@ End Sub
 
 Sub SQL_CadastraCarros()
 
-Dim carro As String
+Dim carro$
 
 carro = "Maverick"
 
