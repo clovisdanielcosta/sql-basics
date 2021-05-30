@@ -9,25 +9,38 @@ Sub ConverterSQL()
                 pConversor.Cells(i, 8).Value <> "" Or _
                 pConversor.Cells(i, 9).Value <> "" Or _
                 pConversor.Cells(i, 10).Value <> "" Or _
-                pConversor.Cells(i, 11).Value <> ""
+                pConversor.Cells(i, 11).Value <> "" Or _
+                pConversor.Cells(i + 1, 5).Value <> "" Or _
+                pConversor.Cells(i + 2, 5).Value <> "" Or _
+                pConversor.Cells(i + 3, 5).Value <> "" Or _
+                pConversor.Cells(i + 4, 5).Value <> "" Or _
+                pConversor.Cells(i + 5, 5).Value <> "" Or _
+                pConversor.Cells(i + 1, 6).Value <> "" Or _
+                pConversor.Cells(i + 2, 6).Value <> "" Or _
+                pConversor.Cells(i + 3, 6).Value <> "" Or _
+                pConversor.Cells(i + 4, 6).Value <> "" Or _
+                pConversor.Cells(i + 5, 6).Value <> "" Or _
+                pConversor.Cells(i + 1, 7).Value <> "" Or _
+                pConversor.Cells(i + 2, 7).Value <> "" Or _
+                pConversor.Cells(i + 3, 7).Value <> "" Or _
+                pConversor.Cells(i + 4, 7).Value <> "" Or _
+                pConversor.Cells(i + 5, 7).Value <> ""
     
-                
-                
                 For j = 6 To 11
                     pConversor.Cells(i, 5).Value = pConversor.Cells(i, 5).Value & " " & pConversor.Cells(i, j).Value
                 Next
                 
                 pConversor.Cells(i, 5).Value = pConversor.Cells(1, 19).Value & " " & LTrim(pConversor.Cells(i, 5).Value)
                 
-                pConversor.Cells(i, 5).Value = RTrim(pConversor.Cells(i, 5).Value) & pConversor.Cells(1, 19).Value & " & _"
+                pConversor.Cells(i, 5).Value = RTrim(pConversor.Cells(i, 5).Value) & " " & pConversor.Cells(1, 19).Value & " & _"
                 
                 pConversor.Range(Cells(i, 6), Cells(i, 11)).ClearContents
                 
                 
                 i = i + 1
     Wend
-                
-                pConversor.Cells(i - 1, 5).Value = Replace(pConversor.Cells(i - 1, 5).Value, "& _", "")
+    
+    pConversor.Cells(i - 1, 5).Value = Replace(pConversor.Cells(i - 1, 5).Value, "& _", "")
             
 End Sub
 
@@ -50,8 +63,8 @@ Sub SubstituirVariaveis()
     Dim esquerda As String
     Dim i, j
     
-    esquerda = " " & pConversor.Cells(1, 19).Value & " & "
-    direita = " & " & pConversor.Cells(1, 19).Value & " "
+    esquerda = " '  " & pConversor.Cells(1, 19).Value & " & "
+    direita = " & " & pConversor.Cells(1, 19).Value & " ' "
     i = 4
     
     While pConversor.Cells(i, 2).Value <> ""
@@ -77,3 +90,4 @@ Sub SubstituirVariaveis()
     Wend
         
 End Sub
+
