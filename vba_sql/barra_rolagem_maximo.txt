@@ -1,0 +1,15 @@
+Private Sub Worksheet_Change(ByVal Target As Range)
+    Set intervalo = Application.Union(Range(Cells(6, 14), Cells(19, 14)), Range(Cells(6, 19), Cells(19, 19)))
+    Dim liberacao As Integer
+    
+    liberacao = pANALISE.[B1].Value
+    
+    If liberacao = 1 Then
+            If Intersect(Target, intervalo) Is Nothing Or Target.Cells.Count > 1 Then Exit Sub
+                 Application.EnableEvents = False
+                 ColocarFormulaEntradaSaida
+                 Application.EnableEvents = True
+   End If
+    
+    
+End Sub
