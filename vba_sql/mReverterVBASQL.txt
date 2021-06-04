@@ -1,0 +1,40 @@
+Sub ReverterVBAParaSQL()
+
+        Dim i%, j%, k%, qtdeStrings%, str$
+        
+        pConversor.Cells(3, 6).Value = ""
+        pConversor.Cells(4, 6).Value = ""
+        
+        i = 5
+        While pConversor.Cells(i, 6).Value <> ""
+            
+            If Left(pConversor.Cells(i, 6).Value, 4) = "str_" Then
+                    pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, "      ", "")
+                    pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, "  ", "")
+                    qtdeStrings = qtdeStrings + 1
+                    End If
+            pConversor.Cells(i, 6).Value = Replace(Replace(Replace(Replace(pConversor.Cells(i, 6).Value, " & _", ""), " & ", ""), """", ""), "      ", "")
+            
+                    
+                    
+            i = i + 1
+        
+        Wend
+
+        pConversor.Cells(i + 1, 6).Value = ""
+        pConversor.Cells(i + 3, 6).Value = ""
+        
+        j = 5
+        While pConversor.Cells(j, 6).Value <> ""
+        
+                For k = 1 To qtdeStrings + 1
+                    str = CStr("str_" & k & " = ")
+                    pConversor.Cells(j, 6).Value = Replace(pConversor.Cells(j, 6).Value, str, "")
+                Next
+        
+                j = j + 1
+        
+        Wend
+        
+End Sub
+

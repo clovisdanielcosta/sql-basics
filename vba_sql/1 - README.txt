@@ -6,11 +6,18 @@ Converter SQL em VBA:
 
 3 - Formatar a planilha de acordo com a imagem modelo (B).
 
-4 - Criar os 3 Botões de acordo com a imagem modelo (B).
+4 - Criar os 6 Botões de acordo com a imagem modelo (B).
 
 5 - Nomear no VBA a primeira Aba da planilha como "pConversor".
 
-6 - Criar 3 módulos: "mConverterSQL", "mConcatenar" e "mQueries".
+6 - Criar 6 módulos: 	
+
+"mAuxiliar",
+"mConcatenar",			
+"mConverterSQL", 
+"mQueries",
+"mReverterVBASQL"
+"mSubstituirVariaveis".
 
 7 - Copiar para os respectivos módulos o conteúdo dos arquivos .txt de mesmo nome.
 

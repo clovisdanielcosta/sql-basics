@@ -30,3 +30,25 @@ sqlCadastraCarros = _
                         " ORDER BY c.ano "
 
 End Sub
+
+Function SQL_TESTESVBA()
+Dim strSQL$, str_1$
+str_1 = " SELECT        " & _
+                                "  M.ORIGEM,       " & _
+                                "  C.MODELO,       " & _
+                                "  C.ANO      " & _
+                                " FROM        " & _
+                                "  MARCAS AS M,       " & _
+                                "  'FIESTA' AS C      " & _
+                                "   WHERE     " & _
+                                "     M.CODMARCA = C.CODMARCA    " & _
+                                "     AND   " & _
+                                "      M.ORIGEM  " & _
+                                "       IN ('ITALIANA') " & _
+                                " ORDER BY C.ANO       "
+
+strSQL = strSQL & str_1
+
+End Function
+
+

@@ -8,10 +8,12 @@ End Sub
 Sub TesteSQLComVariavel()
     
     Call SQL_CadastraCarros
-    Dim strDois$, aspasFinais$
+    Dim strDois$, aspas$
     
     strDois = Replace(sqlCadastraCarros, "Maverick", "Alfa Romeo")
     MsgBox (strDois)
     
 End Sub
+
+
 

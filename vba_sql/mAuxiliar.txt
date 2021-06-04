@@ -1,0 +1,75 @@
+Sub LimparIntervaloSQL()
+
+    pConversor.Range(Cells(3, 6), Cells(10000, 12)).ClearContents
+    
+End Sub
+
+Sub copiarConsulta()
+    
+    Dim i%, j%
+    
+    If pConversor.Cells(3, 6).Value = "" Then
+            i = 5
+            j = i
+    Else
+            i = 3
+            j = i
+    End If
+    
+   While pConversor.Cells(i, 6).Value <> ""
+   i = i + 1
+   Wend
+   
+   MsgBox "Cole a função dentro de um MÓDULO  (CTRL+V)"
+   If j = 5 Then
+    pConversor.Range(Cells(j, 6), Cells(i - 1, 6)).Copy
+  Else
+    pConversor.Range(Cells(j, 6), Cells(i + 3, 6)).Copy
+  End If
+End Sub
+
+Sub CarregarExemplo()
+
+      Range("F4").Select
+    ActiveCell.FormulaR1C1 = "SELECT "
+    Range("G5").Select
+    ActiveCell.FormulaR1C1 = "M.MARCA, "
+    Range("G6").Select
+    ActiveCell.FormulaR1C1 = "M.origem, "
+    Range("G7").Select
+    ActiveCell.FormulaR1C1 = "C.MODELO, "
+    Range("G8").Select
+    ActiveCell.FormulaR1C1 = "C.ANO"
+    Range("F9").Select
+    ActiveCell.FormulaR1C1 = "FROM "
+    Range("G10").Select
+    ActiveCell.FormulaR1C1 = "MARCAS AS M, "
+    Range("G11").Select
+    ActiveCell.FormulaR1C1 = "'FIESTA' AS C"
+    Range("H12").Select
+    ActiveCell.FormulaR1C1 = "WHERE"
+    Range("I13").Select
+    ActiveCell.FormulaR1C1 = " M.CODMARCA = C.CODMARCA"
+    Range("J14").Select
+    ActiveCell.FormulaR1C1 = "and"
+    Range("K15").Select
+    ActiveCell.FormulaR1C1 = "M.ORIGEM"
+    Range("L16").Select
+    ActiveCell.FormulaR1C1 = "IN ('ITALIANA')"
+    Range("F17").Select
+    ActiveCell.FormulaR1C1 = "ORDER BY C.ANO"
+    Range("F4:L17").Select
+    Selection.Copy
+    Range("F20").Select
+    ActiveSheet.Paste
+    Application.CutCopyMode = False
+    Range("F4").Select
+    'Range("AS4:AY17").Select
+    'Selection.Copy
+    'Range("F4").Select
+    'ActiveSheet.Paste
+    'Range("F4").Select
+    'Application.CutCopyMode = False
+    
+End Sub
+

@@ -1,79 +1,66 @@
-Sub ConverterSQL()
 
-    Dim i As Integer
+Sub ConverterSQLParaVBA()
+
+    Dim i%, indentacao$, nomeConsulta$, aspas$, str_$, strSQL$, trocaLinha$, trocaLinha2$, qtdeStrings%
+    aspas = """"
+    nomeConsulta = UCase(pConversor.Cells(3, 2).Value)
+    indentacao = pConversor.Cells(2, 12).Value
+    qtdeStrings = 1
+    
     i = 4
-    
-    While pConversor.Cells(i, 4).Value <> "" Or _
-                pConversor.Cells(i, 5).Value <> "" Or _
-                pConversor.Cells(i, 6).Value <> "" Or _
-                pConversor.Cells(i, 7).Value <> "" Or _
-                pConversor.Cells(i, 8).Value <> "" Or _
-                pConversor.Cells(i, 9).Value <> "" Or _
-                pConversor.Cells(i, 10).Value <> ""
-    
-                
-                
-                For j = 5 To 10
-                    pConversor.Cells(i, 4).Value = pConversor.Cells(i, 4).Value & " " & pConversor.Cells(i, j).Value
+    While WorksheetFunction.CountA(pConversor.Range(Cells(i, 6), Cells(i + 10, 12))) <> 0
+
+                For j = 7 To 12
+                        pConversor.Cells(i, 6).Value = UCase(pConversor.Cells(i, 6).Value) & " " & UCase(pConversor.Cells(i, j).Value)
                 Next
                 
-                pConversor.Cells(i, 4).Value = pConversor.Cells(1, 18).Value & " " & LTrim(pConversor.Cells(i, 4).Value)
+                If indentacao = "Com Indentação" Then
+                    pConversor.Cells(i, 6).Value = "                " & aspas & " " & pConversor.Cells(i, 6).Value
+                    pConversor.Cells(i, 6).Value = pConversor.Cells(i, 6).Value & " " & aspas & " & _"
+                Else
+                    pConversor.Cells(i, 6).Value = "                " & aspas & " " & LTrim(pConversor.Cells(i, 6).Value)
+                    pConversor.Cells(i, 6).Value = RTrim(pConversor.Cells(i, 6).Value) & " " & aspas & " & _"
+                End If
                 
-                pConversor.Cells(i, 4).Value = RTrim(pConversor.Cells(i, 4).Value) & pConversor.Cells(1, 18).Value & " & _"
+                pConversor.Range(Cells(i, 7), Cells(i, 12)).ClearContents
                 
-                pConversor.Range(Cells(i, 5), Cells(i, 10)).ClearContents
-                
+                If i = 4 Then
+                    pConversor.Cells(i, 6).Value = "str_" & 1 & " = " & pConversor.Cells(i, 6).Value
+                    pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, "                ", "  ")
+                ElseIf (i - 4) Mod 25 = 0 And i <> 4 Then
+                    pConversor.Cells(i - 1, 6).Value = Replace(pConversor.Cells(i - 1, 6).Value, "& _", "")
+                    pConversor.Cells(i, 6).Value = "str_" & (i - 4) / 25 + 1 & " = " & pConversor.Cells(i, 6).Value
+                    pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, "                ", "  ")
+                    qtdeStrings = qtdeStrings + 1
+                End If
                 
                 i = i + 1
     Wend
-                
-                pConversor.Cells(i - 1, 4).Value = Replace(pConversor.Cells(i - 1, 4).Value, "& _", "")
-            
-End Sub
-
-Sub CarregarExemplo()
-
-    Range("R4:X17").Select
-    Selection.Copy
-    Range("D4").Select
-    ActiveSheet.Paste
-    Range("D4").Select
-    Application.CutCopyMode = False
     
-End Sub
-
-Sub SubstituirVariaveis()
-
-    Dim variavel As String
-    Dim substituto As String
-    Dim direita As String
-    Dim esquerda As String
-    Dim i, j
+    pConversor.Cells(i - 1, 6).Value = Replace(pConversor.Cells(i - 1, 6).Value, "& _", "")
     
-    esquerda = " " & pConversor.Cells(1, 18).Value & " & "
-    direita = " & " & pConversor.Cells(1, 18).Value & " "
-    i = 4
-    
-    While pConversor.Cells(i, 1).Value <> ""
-        
-            variavel = UCase(pConversor.Cells(i, 1).Value)
-            substituto = UCase(pConversor.Cells(i, 2).Value)
-            
-                        j = 4
-                        While pConversor.Cells(j, 4).Value <> ""
-                                
-                                If Left(variavel, 1) = "'" Then
-                                    pConversor.Cells(j, 4).Value = Replace(pConversor.Cells(j, 4).Value, variavel, esquerda & substituto & direita)
-                                Else
-                                    pConversor.Cells(j, 4).Value = Replace(pConversor.Cells(j, 4).Value, variavel, substituto)
-                                End If
-                                
-                                j = j + 1
-                        
-                        Wend
-            
-            i = i + 1
-            
+    trocaLinha = pConversor.Cells(4, 6).Value
+    i = 5
+    While pConversor.Cells(i, 6).Value <> ""
+       pConversor.Cells(i, 6).Value = trocaLinha
+       trocaLinha = pConversor.Cells(i + 1, 6).Value
+        i = i + 1
     Wend
-        
+    
+    pConversor.Cells(3, 6).Value = "Function " & nomeConsulta & "()"
+    pConversor.Cells(4, 6).Value = "Dim strSQL$, "
+    
+    For j = 1 To qtdeStrings
+        pConversor.Cells(4, 6).Value = pConversor.Cells(4, 6).Value & "str_" & j & "$, " & ""
+    Next
+    
+    pConversor.Cells(4, 6).Value = Left(pConversor.Cells(4, 6).Value, Len(pConversor.Cells(4, 6).Value) - 2)
+    pConversor.Cells(i, 6).Value = ""
+    strSQL = "strSQL = " & Replace(Replace(Replace(pConversor.Cells(4, 6).Value, "Dim ", ""), ",", " &"), "$", "")
+    pConversor.Cells(i + 1, 6).Value = strSQL
+    pConversor.Cells(i + 2, 6).Value = ""
+    pConversor.Cells(i + 3, 6).Value = "End Function"
+            
 End Sub
+
+

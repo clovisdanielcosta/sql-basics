@@ -1,0 +1,35 @@
+
+Sub SubstituirVariaveis()
+
+    Dim variavel$, substituta$, direita$, esquerda$, aspasFinais$
+    Dim i%, j%
+    
+    aspas = """"
+    esquerda = "' " & aspas & " & "
+    direita = " & " & aspas & " '"
+    j = 7
+    
+    While pConversor.Cells(j, 2).Value <> ""
+        
+            variavel = UCase(pConversor.Cells(j, 2).Value)
+            substituta = UCase(pConversor.Cells(j, 3).Value)
+                                                    
+            i = 5
+            While pConversor.Cells(i, 6).Value <> ""
+                    
+                    If Left(variavel, 1) = "'" Then
+                        pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, variavel, esquerda & substituta & direita)
+                    Else
+                        pConversor.Cells(i, 6).Value = Replace(pConversor.Cells(i, 6).Value, variavel, substituta)
+                    End If
+                    
+                    i = i + 1
+                    
+            Wend
+                        
+            j = j + 1
+            
+    Wend
+        
+End Sub
+
