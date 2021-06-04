@@ -16,7 +16,7 @@ Sub copiarConsulta()
             j = i
     End If
     
-   While pConversor.Cells(i, 6).Value <> ""
+   While WorksheetFunction.CountA(pConversor.Range(Cells(i, 6), Cells(i + 10, 6)))
    i = i + 1
    Wend
    
