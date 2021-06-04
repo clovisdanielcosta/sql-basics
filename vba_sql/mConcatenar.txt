@@ -16,4 +16,12 @@ Sub TesteSQLComVariavel()
 End Sub
 
 
+Sub UsarConsultaSQL()
+
+    Dim minhaString As String
+    minhaString = SQL_TESTESVBA()
+    
+    MsgBox (minhaString)
+
+End Sub
 

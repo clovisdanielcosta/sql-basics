@@ -1,7 +1,7 @@
 
 Sub ConverterSQLParaVBA()
 
-    Dim i%, indentacao$, nomeConsulta$, aspas$, str_$, strSQL$, trocaLinha$, trocaLinha2$, qtdeStrings%
+    Dim i%, indentacao$, nomeConsulta$, aspas$, str_$, trocaLinha$, trocaLinha2$, qtdeStrings%
     aspas = """"
     nomeConsulta = UCase(pConversor.Cells(3, 2).Value)
     indentacao = pConversor.Cells(2, 12).Value
@@ -47,8 +47,8 @@ Sub ConverterSQLParaVBA()
         i = i + 1
     Wend
     
-    pConversor.Cells(3, 6).Value = "Function " & nomeConsulta & "()"
-    pConversor.Cells(4, 6).Value = "Dim strSQL$, "
+    pConversor.Cells(3, 6).Value = "Function " & nomeConsulta & "() As String"
+    pConversor.Cells(4, 6).Value = "Dim  "
     
     For j = 1 To qtdeStrings
         pConversor.Cells(4, 6).Value = pConversor.Cells(4, 6).Value & "str_" & j & "$, " & ""
@@ -56,8 +56,8 @@ Sub ConverterSQLParaVBA()
     
     pConversor.Cells(4, 6).Value = Left(pConversor.Cells(4, 6).Value, Len(pConversor.Cells(4, 6).Value) - 2)
     pConversor.Cells(i, 6).Value = ""
-    strSQL = "strSQL = " & Replace(Replace(Replace(pConversor.Cells(4, 6).Value, "Dim ", ""), ",", " &"), "$", "")
-    pConversor.Cells(i + 1, 6).Value = strSQL
+    nomeConsulta = nomeConsulta & " = " & Replace(Replace(Replace(pConversor.Cells(4, 6).Value, "Dim ", ""), ",", " &"), "$", "")
+    pConversor.Cells(i + 1, 6).Value = nomeConsulta
     pConversor.Cells(i + 2, 6).Value = ""
     pConversor.Cells(i + 3, 6).Value = "End Function"
             

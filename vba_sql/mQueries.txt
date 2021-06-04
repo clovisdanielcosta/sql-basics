@@ -31,24 +31,39 @@ sqlCadastraCarros = _
 
 End Sub
 
-Function SQL_TESTESVBA()
-Dim strSQL$, str_1$
+Function SQL_TESTESVBA() As String
+Dim str_1$, str_2$
 str_1 = " SELECT        " & _
-                                "  M.ORIGEM,       " & _
-                                "  C.MODELO,       " & _
-                                "  C.ANO      " & _
-                                " FROM        " & _
-                                "  MARCAS AS M,       " & _
-                                "  'FIESTA' AS C      " & _
-                                "   WHERE     " & _
-                                "     M.CODMARCA = C.CODMARCA    " & _
-                                "     AND   " & _
-                                "      M.ORIGEM  " & _
-                                "       IN ('ITALIANA') " & _
-                                " ORDER BY C.ANO       "
+                "  M.ORIGEM,       " & _
+                "  C.MODELO,       " & _
+                "  C.ANO      " & _
+                " FROM        " & _
+                "  MARCAS AS M,       " & _
+                "  FIESTA' AS C      " & _
+                "   WHERE     " & _
+                "     M.CODMARCA = C.CODMODELO    " & _
+                "     AND   " & _
+                "      M.ORIGEM  " & _
+                "       IN ('ITALIANA') " & _
+                " ORDER BY C.ANO       " & _
+                "        " & _
+                "        " & _
+                " SELECT        " & _
+                "  M.MARCA,       " & _
+                "  M.ORIGEM,       " & _
+                "  C.MODELO,       " & _
+                "  C.ANO      " & _
+                " FROM        " & _
+                "  MARCAS AS M,       " & _
+                "  FIESTA' AS C      " & _
+                "   WHERE     "
+str_2 = "     M.CODMARCA = C.CODMODELO    " & _
+                "     AND   " & _
+                "      M.ORIGEM  " & _
+                "       IN ('ITALIANA') " & _
+                " ORDER BY C.ANO       "
 
-strSQL = strSQL & str_1
+SQL_TESTESVBA = str_1 & str_2
 
 End Function
-
 

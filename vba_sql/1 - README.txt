@@ -23,4 +23,6 @@ Converter SQL em VBA:
 
 8 - Atribuir as macros aos botões.
 
+9 - Veja o módulo mConcatenar para ver como chamar o resultado da função atribuindo à uma variável.
+
 
